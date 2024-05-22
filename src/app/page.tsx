@@ -5,40 +5,46 @@ import PersonIcon from '@mui/icons-material/Person';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import theme from './setting';
 import React from "react";
+import { Inter } from "next/font/google";
 
 
 const MenuList = ["Home", "ReadMe", "Author", "Contact"];
+const inter = Inter({subsets: ['cyrillic']})
 
 export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar>
-        <Toolbar>
-          <Typography variant="h5" noWrap component="div">Minerva-ChatRadio</Typography>
-        </Toolbar>
-      </AppBar>
-      <Box position="fixed">
-        <Drawer anchor="left" variant="permanent">
-          <Toolbar />
-            <List>
-              {MenuList.map((text,index) => (
-                <ListItem key={text}>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {text === "Home" && <HomeIcon />}
-                      {text === "ReadMe" && <ArticleIcon/>}
-                      {text === "Author" && <PersonIcon/>}
-                      {text === "Contact" && <ContactSupportIcon/>}
-                    </ListItemIcon>
-                    <ListItemText primary={text}/>
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
-        </Drawer>
-      </Box>
+      <header className={inter.className}>
+        <CssBaseline />
+        <AppBar>
+          <Toolbar>
+            <Typography variant="h5" noWrap component="div">Minerva-ChatRadio</Typography>
+          </Toolbar>
+        </AppBar>
+      </header>
+      <nav className={inter.className}>
+        <Box position="fixed">
+          <Drawer anchor="left" variant="permanent">
+            <Toolbar />
+              <List>
+                {MenuList.map((text,index) => (
+                  <ListItem key={text}>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        {text === "Home" && <HomeIcon />}
+                        {text === "ReadMe" && <ArticleIcon/>}
+                        {text === "Author" && <PersonIcon/>}
+                        {text === "Contact" && <ContactSupportIcon/>}
+                      </ListItemIcon>
+                      <ListItemText primary={text}/>
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+          </Drawer>
+        </Box>
+      </nav>
     </ThemeProvider>
   );
 }
