@@ -6,6 +6,7 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import theme from './setting';
 import React from "react";
 import { Inter } from "next/font/google";
+import ShowArticles from "./components/showArticles";
 
 
 const MenuList = ["Home", "ReadMe", "Author", "Contact"];
@@ -45,6 +46,12 @@ export default function Home() {
           </Drawer>
         </Box>
       </nav>
+      <main>
+        <Box>
+          <Typography>here</Typography>
+          <ShowArticles/>
+        </Box>
+      </main>
     </ThemeProvider>
   );
 }
