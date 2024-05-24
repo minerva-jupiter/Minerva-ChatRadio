@@ -1,4 +1,4 @@
-import { Box, Divider, List, ListItem, ListItemText, Typography } from "@mui/material"
+import { Box, Divider, List, ListItem, ListItemText } from "@mui/material"
 import { readArticles } from "./articleOperator"
 
 export default function ShowArticles(){

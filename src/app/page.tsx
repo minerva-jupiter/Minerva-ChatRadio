@@ -1,4 +1,4 @@
-import { AppBar, Box, CssBaseline, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ThemeProvider, Toolbar, Typography } from "@mui/material";
+import { AppBar, CssBaseline, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,7 +7,6 @@ import theme from './setting';
 import React from "react";
 import { Inter } from "next/font/google";
 import ShowArticles from "./components/showArticles";
-import { AddBoxOutlined } from "@mui/icons-material";
 
 type MenuList = {
   name:string;
