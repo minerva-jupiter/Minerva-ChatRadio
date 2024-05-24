@@ -1,4 +1,4 @@
-import { AppBar, Box, CssBaseline, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ThemeProvider, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, CssBaseline, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import PersonIcon from '@mui/icons-material/Person';
@@ -22,40 +22,42 @@ const menulist: MenuList[] = [
 ]
 
 const inter = Inter({subsets: ['cyrillic']})
+const DrawerIsOpen :boolean = true;
 
 export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <header className={inter.className}>
+      <header>
         <AppBar>
           <Toolbar>
-            <Typography variant="h5" noWrap component="div">Minerva-ChatRadio</Typography>
+            <Typography>Minerva ChatRadio</Typography>
           </Toolbar>
         </AppBar>
       </header>
-      <Box position="sticky">
-        <Drawer anchor="left" variant="permanent">
-          <Toolbar/>
-          <List>
-            {menulist.map(({name,link,icon}:MenuList) => (
-              <ListItem key={name} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {icon}
-                  </ListItemIcon>
-                  <ListItemText primary={name}/>
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
-        <Box>
-          <Typography>here is articles</Typography>
-          <ShowArticles></ShowArticles>
-        </Box>
-      </Box>
+      <body>
+        <Toolbar/>
+        <Grid container spacing={2}>
+          <Grid item xs="auto">
+            <List>
+              {menulist.map(({name,link,icon}:MenuList) => (
+                <ListItem key={name} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      {icon}
+                    </ListItemIcon>
+                    <ListItemText primary={name}/>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
+          <Grid item xs={10} alignItems="center">
+            <ShowArticles></ShowArticles>
+          </Grid>
+        </Grid>
+      </body>
     </ThemeProvider>
   );
 }
