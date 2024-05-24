@@ -1,10 +1,16 @@
 'use client';
 import { createTheme } from "@mui/material";
-import { Noto_Sans_JP } from "next/font/google";
 
 const theme = createTheme({
   palette: {
-     mode: 'dark',
+    mode: 'dark',
+    primary:{
+      main: '#440005',
+      dark: '#440005',
+    },
+    background: {
+      default: '#1e1e1e',
+    }
   },
 })
 
