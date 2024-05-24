@@ -31,7 +31,7 @@ export default function Home() {
       <header>
         <AppBar>
           <Toolbar>
-            <Typography>Minerva ChatRadio</Typography>
+            <Typography variant="h5" alignItems="center">Minerva ChatRadio</Typography>
           </Toolbar>
         </AppBar>
       </header>
