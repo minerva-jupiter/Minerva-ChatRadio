@@ -7,51 +7,55 @@ import theme from './setting';
 import React from "react";
 import { Inter } from "next/font/google";
 import ShowArticles from "./components/showArticles";
+import { AddBoxOutlined } from "@mui/icons-material";
 
+type MenuList = {
+  name:string;
+  link:string;
+  icon:React.ReactNode;
+}
+const menulist: MenuList[] = [
+  {name:"Home",link:'./home',icon:<HomeIcon/>},
+  {name:"ReadMe",link:'../README',icon:<ArticleIcon/>},
+  {name:"Author",link:'https://sites.google.com/view/juppiter',icon:<PersonIcon/>},
+  {name:"Contact",link:'./contact',icon:<ContactSupportIcon/>}
+]
 
-const MenuList = ["Home", "ReadMe", "Author", "Contact"];
 const inter = Inter({subsets: ['cyrillic']})
 
 export default function Home() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <header className={inter.className}>
-        <CssBaseline />
         <AppBar>
           <Toolbar>
             <Typography variant="h5" noWrap component="div">Minerva-ChatRadio</Typography>
           </Toolbar>
         </AppBar>
       </header>
-      <nav className={inter.className}>
-        <Box position="fixed">
-          <Drawer anchor="left" variant="permanent">
-            <Toolbar />
-              <List>
-                {MenuList.map((text,index) => (
-                  <ListItem key={text}>
-                    <ListItemButton>
-                      <ListItemIcon>
-                        {text === "Home" && <HomeIcon />}
-                        {text === "ReadMe" && <ArticleIcon/>}
-                        {text === "Author" && <PersonIcon/>}
-                        {text === "Contact" && <ContactSupportIcon/>}
-                      </ListItemIcon>
-                      <ListItemText primary={text}/>
-                    </ListItemButton>
-                  </ListItem>
-                ))}
-              </List>
-          </Drawer>
-        </Box>
-      </nav>
-      <main>
+      <Box position="sticky">
+        <Drawer anchor="left" variant="permanent">
+          <Toolbar/>
+          <List>
+            {menulist.map(({name,link,icon}:MenuList) => (
+              <ListItem key={name} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    {icon}
+                  </ListItemIcon>
+                  <ListItemText primary={name}/>
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
         <Box>
-          <Typography>here</Typography>
-          <ShowArticles/>
+          <Typography>here is articles</Typography>
+          <ShowArticles></ShowArticles>
         </Box>
-      </main>
+      </Box>
     </ThemeProvider>
   );
 }
