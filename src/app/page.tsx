@@ -1,5 +1,5 @@
 "use client"
-import { AppBar, createTheme, CssBaseline, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, ThemeProvider, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, createTheme, CssBaseline, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,26 +7,28 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import React from "react";
 import { Inter } from "next/font/google";
 import ShowArticles from "./components/showArticles";
-import getDesignTokens from './setting';
+import getDesignTokens, { mcrMainField } from './setting';
 import ShowReadMe from "./components/README";
+import ShowAboutAuthor from "./components/AboutAuthor";
+import { Link } from "react-router-dom";
 
 type MenuList = {
-  index:Number;
+  index:number;
   name:string;
-  link:React.ReactNode;
+  link:any;
   icon:React.ReactNode;
 }
 const menulist: MenuList[] = [
-  {index:0, name:"Home",link:<ShowArticles/>, icon:<HomeIcon/>},
+  {index:0, name:"Home",link:'./article', icon:<HomeIcon/>},
   {index:1, name:"ReadMe",link:<ShowReadMe/>, icon:<ArticleIcon/>},
-  {index:2, name:"Author",link:<a />,icon:<PersonIcon/>},
-  {index:3, name:"Contact",link:'./contact',icon:<ContactSupportIcon/>}
+  {index:2, name:"Author",link:<ShowAboutAuthor/>,icon:<PersonIcon/>}
 ];
 
 
 
 const inter = Inter({subsets: ['cyrillic']})
-var nowMainField = <ShowArticles/>;
+//mainFieldの初期設定
+var nowMainField = <ShowReadMe/>;
 
 export default function Home() {
   const [mode, setMode] = React.useState<PaletteMode>('dark');
@@ -61,20 +63,20 @@ export default function Home() {
         <Grid container spacing={5}>
           <Grid item xs="auto">
             <List>
-              {menulist.map(({index,name,icon}:MenuList) => (
-                <ListItem key={name} disablePadding>
-                  <ListItemButton onClick={() => MenuOnClick(index)}>
-                    <ListItemIcon>
-                      {icon}
-                    </ListItemIcon>
-                    <ListItemText primary={name}/>
-                  </ListItemButton>
-                </ListItem>
+              {menulist.map(({index,name,icon,link}:MenuList) => (
+                  <ListItem key={name} disablePadding>
+                    <Button onClick={() => MenuOnClick(index)} href={link}>
+                      <ListItemIcon>
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={name}/>
+                    </Button>
+                  </ListItem>
               ))}
             </List>
           </Grid>
           <Grid item xs={10} alignItems="center">
-            {nowMainField}
+            {mcrMainField(nowMainField)}
           </Grid>
         </Grid>
       </body>

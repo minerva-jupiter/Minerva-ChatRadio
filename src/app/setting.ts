@@ -19,8 +19,8 @@ const getDesignTokens = (mode: PaletteMode) => ({
       : {
           // palette values for dark mode
           primary: {
-            main: '#440005',
-            dark: '#440005',
+            main: '#dc000f',
+            dark: '#ff0010',
           },
           secondary: {
             main: '#00443f',
@@ -33,8 +33,8 @@ const getDesignTokens = (mode: PaletteMode) => ({
   },
 });
 
-function mcrMainfield() {
-  
+export function mcrMainField(nowMainField :any) {
+  return(nowMainField);
 }
 
 export default getDesignTokens;
