@@ -11,6 +11,7 @@ import getDesignTokens, { mcrMainField } from './setting';
 import ShowReadMe from "./components/README";
 import ShowAboutAuthor from "./components/AboutAuthor";
 import { Link } from "react-router-dom";
+import { SideNav } from "./components/side-nav";
 
 type MenuList = {
   index:number;
@@ -62,18 +63,7 @@ export default function Home() {
         <Toolbar/>
         <Grid container spacing={5}>
           <Grid item xs="auto">
-            <List>
-              {menulist.map(({index,name,icon,link}:MenuList) => (
-                  <ListItem key={name} disablePadding>
-                    <Button onClick={() => MenuOnClick(index)} href={link}>
-                      <ListItemIcon>
-                        {icon}
-                      </ListItemIcon>
-                      <ListItemText primary={name}/>
-                    </Button>
-                  </ListItem>
-              ))}
-            </List>
+            <SideNav/>
           </Grid>
           <Grid item xs={10} alignItems="center">
             {mcrMainField(nowMainField)}

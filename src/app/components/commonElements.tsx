@@ -15,8 +15,8 @@ type MenuList = {
     name:string;
     link:any;
     icon:React.ReactNode;
-  }
-  const menulist: MenuList[] = [
+  };
+const menulist: MenuList[] = [
     {index:0, name:"Home",link:'./articles', icon:<HomeIcon/>},
     {index:1, name:"ReadMe",link:<ShowReadMe/>, icon:<ArticleIcon/>},
     {index:2, name:"Author",link:<ShowAboutAuthor/>,icon:<PersonIcon/>}
