@@ -1,5 +1,5 @@
 "use client"
-import { AppBar, createTheme, CssBaseline, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, ThemeProvider, Toolbar, Typography } from "@mui/material";
+import { AppBar, Button, createTheme, CssBaseline, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, PaletteMode, ThemeProvider, Toolbar, Typography } from "@mui/material";
 import HomeIcon from '@mui/icons-material/Home';
 import ArticleIcon from '@mui/icons-material/Article';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,55 +7,29 @@ import ContactSupportIcon from '@mui/icons-material/ContactSupport';
 import React from "react";
 import { Inter } from "next/font/google";
 import ShowArticles from "./components/showArticles";
-import { grey } from "@mui/material/colors";
-import { dark } from "@mui/material/styles/createPalette";
+import getDesignTokens, { mcrMainField } from './setting';
+import ShowReadMe from "./components/README";
+import ShowAboutAuthor from "./components/AboutAuthor";
+import { Link } from "react-router-dom";
+import { SideNav } from "./components/side-nav";
 
 type MenuList = {
+  index:number;
   name:string;
-  link:string;
+  link:any;
   icon:React.ReactNode;
 }
 const menulist: MenuList[] = [
-  {name:"Home",link:'./home',icon:<HomeIcon/>},
-  {name:"ReadMe",link:'../README',icon:<ArticleIcon/>},
-  {name:"Author",link:'https://sites.google.com/view/juppiter',icon:<PersonIcon/>},
-  {name:"Contact",link:'./contact',icon:<ContactSupportIcon/>}
+  {index:0, name:"Home",link:'./article', icon:<HomeIcon/>},
+  {index:1, name:"ReadMe",link:<ShowReadMe/>, icon:<ArticleIcon/>},
+  {index:2, name:"Author",link:<ShowAboutAuthor/>,icon:<PersonIcon/>}
 ];
 
-const getDesignTokens = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    ...(mode === 'light'
-      ? {
-          // palette values for light mode
-          primary: {
-            main: '#440005',
-            dark: '#440005',
-          },
-          secondary: {
-            main: '#00443f',
-            dark: '#00443f',
-          },
-        }
-      : {
-          // palette values for dark mode
-          primary: {
-            main: '#440005',
-            dark: '#440005',
-          },
-          secondary: {
-            main: '#00443f',
-            dark: '#00443f',
-          },
-          background: {
-            default: '#1e1e1e',
-          },
-        }),
-  },
-});
+
 
 const inter = Inter({subsets: ['cyrillic']})
-const DrawerIsOpen :boolean = true;
+//mainFieldの初期設定
+var nowMainField = <ShowReadMe/>;
 
 export default function Home() {
   const [mode, setMode] = React.useState<PaletteMode>('dark');
@@ -73,6 +47,10 @@ export default function Home() {
 
   const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
+  const MenuOnClick = (index: number) => {
+    nowMainField = menulist[index].link;
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -85,21 +63,10 @@ export default function Home() {
         <Toolbar/>
         <Grid container spacing={5}>
           <Grid item xs="auto">
-            <List>
-              {menulist.map(({name,link,icon}:MenuList) => (
-                <ListItem key={name} disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon>
-                      {icon}
-                    </ListItemIcon>
-                    <ListItemText primary={name}/>
-                  </ListItemButton>
-                </ListItem>
-              ))}
-            </List>
+            <SideNav/>
           </Grid>
           <Grid item xs={10} alignItems="center">
-            <ShowArticles></ShowArticles>
+            {mcrMainField(nowMainField)}
           </Grid>
         </Grid>
       </body>
